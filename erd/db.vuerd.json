@@ -244,7 +244,7 @@
           "active": false,
           "left": 125.39999999999998,
           "top": 114.79999999999995,
-          "zIndex": 765,
+          "zIndex": 781,
           "widthName": 68,
           "widthComment": 60
         },
@@ -1194,7 +1194,20 @@
     "indexes": []
   },
   "memo": {
-    "memos": []
+    "memos": [
+      {
+        "value": "Create the other table s",
+        "id": "63f12ae5-c5cf-5a65-0b36-de6cda69bc4a",
+        "ui": {
+          "active": true,
+          "left": 121,
+          "top": 52,
+          "zIndex": 784,
+          "width": 241,
+          "height": 100
+        }
+      }
+    ]
   },
   "relationship": {
     "relationships": [
