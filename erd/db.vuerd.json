@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 2,
-    "scrollLeft": 19,
+    "scrollTop": 1.600000023841858,
+    "scrollLeft": 18.399999618530273,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -1199,10 +1199,10 @@
         "value": "Create the other table s",
         "id": "63f12ae5-c5cf-5a65-0b36-de6cda69bc4a",
         "ui": {
-          "active": true,
-          "left": 121,
-          "top": 52,
-          "zIndex": 784,
+          "active": false,
+          "left": 48,
+          "top": 300,
+          "zIndex": 787,
           "width": 241,
           "height": 100
         }
