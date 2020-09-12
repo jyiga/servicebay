@@ -37,6 +37,151 @@ class systemUsersController extends Controller
     }
 
 
+    public function mlogin()
+    {
+        $this->doNotRenderHeader=1;
+        if(isset($_REQUEST['username']) && isset($_REQUEST['password']))
+        {
+            $this->_model->setusername(filter_var(htmlspecialchars(trim($_REQUEST['username'])),FILTER_SANITIZE_STRING));
+            //$this->_model->setusername(filter_var($_REQUEST['username'],FILTER_SANITIZE_STRING));
+            //$username=filter_var($_REQUEST['username'],FILTER_SANITIZE_STRING);
+            //
+            $this->_model->setpassword(htmlspecialchars(trim($_REQUEST['password'])));
+        // $password=md5($_REQUEST['password']);
+            //$criteria="username='".$this->_model->getusername()."' and password='".$this->_model->getpassword()."'";
+            $reallogin=new reallogin();
+            $reallogin->setPassword($this->_model->getpassword());
+            $reallogin->setUsername($this->_model->getusername());
+
+            $proxy=new proxy($reallogin);
+            $userId=null;
+            $userId=$this->_model->clientLogin($proxy);
+            //error_log(date('Y m d :g:i:s:a ') ."User id:".$userId. "\n", 3, ROOT . DS . 'tmp' . DS . 'logs' . DS . 'proxy.log');
+                
+
+            if(!empty($userId))
+            {
+                //auto role check for auto users.
+                
+                $userrole=new usertyperole();
+                $userrole->getCheckRoles($userId);
+            
+
+                $companyName='';
+                $companylogo='';
+                $companyAddress='';
+                $tin='';
+                $appName='';
+                /* $this->_model->__find($userId);
+                $_SESSION['userId']=$this->_model->getid();
+                $_SESSION['username']=$this->_model->getusername();
+                $configuration=new configurationSetting();
+                $configuration->__findCriteria("systemName='Company Names'");
+                $companyName=$configuration->getsystemValue();
+                $configuration->__findCriteria("systemName='Company logo'");
+                $companylogo=$configuration->getsystemValue();
+                $configuration->__findCriteria("systemName='Address'");
+                $companyAddress=$configuration->getsystemValue();
+                $configuration->__findCriteria("systemName='pictype'");
+                $tin=$configuration->getsystemValue();
+                $configuration->__findCriteria("systemName='app Name'");
+                $appName=$configuration->getsystemValue();
+
+
+                $_SESSION['appName']= $appName;
+                $_SESSION['companyName']=$companyName;
+                $_SESSION['companyAddress']=$companyAddress;
+                $_SESSION['logo']=$companylogo;
+                $_SESSION['picType']=$tin;
+                $_SESSION['LAST_ACTIVITY']=time();
+                session_write_close();
+                header('location:../dashboard/index'); */
+                $response=array('status'=>0,'msg'=>array('userId'=>$userId,'login'=>true));
+                $this->set('json',$response);
+
+            }else{
+                $response=array('status'=>0,'msg'=>array('userId'=>'null','login'=>false));
+                $this->set('json',$response);
+                //header('location:../?msg=supply the correct username or password');
+
+            }
+        }else {
+            $data = json_decode(file_get_contents('php://input'));
+            //$data->username
+            $username =$data->username;
+            $password =$data->password;
+            $this->_model->setusername(filter_var(htmlspecialchars(trim($username)),FILTER_SANITIZE_STRING));
+            //$this->_model->setusername(filter_var($_REQUEST['username'],FILTER_SANITIZE_STRING));
+            //$username=filter_var($_REQUEST['username'],FILTER_SANITIZE_STRING);
+            //
+            $this->_model->setpassword(htmlspecialchars(trim($password)));
+        // $password=md5($_REQUEST['password']);
+            //$criteria="username='".$this->_model->getusername()."' and password='".$this->_model->getpassword()."'";
+            $reallogin=new reallogin();
+            $reallogin->setPassword($this->_model->getpassword());
+            $reallogin->setUsername($this->_model->getusername());
+
+            $proxy=new proxy($reallogin);
+            $userId=null;
+            $userId=$this->_model->clientLogin($proxy);
+            //error_log(date('Y m d :g:i:s:a ') ."User id:".$userId. "\n", 3, ROOT . DS . 'tmp' . DS . 'logs' . DS . 'proxy.log');
+                
+
+            if(!empty($userId))
+            {
+                //auto role check for auto users.
+                
+                $userrole=new usertyperole();
+                $userrole->getCheckRoles($userId);
+                $systemUser = new systemUser();
+                $systemUser->__find($userId);
+            
+
+                $companyName='';
+                $companylogo='';
+                $companyAddress='';
+                $tin='';
+                $appName='';
+                /* $this->_model->__find($userId);
+                $_SESSION['userId']=$this->_model->getid();
+                $_SESSION['username']=$this->_model->getusername();
+                $configuration=new configurationSetting();
+                $configuration->__findCriteria("systemName='Company Names'");
+                $companyName=$configuration->getsystemValue();
+                $configuration->__findCriteria("systemName='Company logo'");
+                $companylogo=$configuration->getsystemValue();
+                $configuration->__findCriteria("systemName='Address'");
+                $companyAddress=$configuration->getsystemValue();
+                $configuration->__findCriteria("systemName='pictype'");
+                $tin=$configuration->getsystemValue();
+                $configuration->__findCriteria("systemName='app Name'");
+                $appName=$configuration->getsystemValue();
+
+
+                $_SESSION['appName']= $appName;
+                $_SESSION['companyName']=$companyName;
+                $_SESSION['companyAddress']=$companyAddress;
+                $_SESSION['logo']=$companylogo;
+                $_SESSION['picType']=$tin;
+                $_SESSION['LAST_ACTIVITY']=time();
+                session_write_close();
+                header('location:../dashboard/index'); */
+                $username=$systemUser->getfirstName()." ".$systemUser->getlastName();
+                $response=array('status'=>0,'msg'=>array('userId'=>$userId,'login'=>true,'username'=>$username));
+                $this->set('json',$response);
+
+            }else{
+                $response=array('status'=>0,'msg'=>array('userId'=>'null','login'=>false));
+                $this->set('json',$response);
+                //header('location:../?msg=supply the correct username or password');
+
+            }
+            //$this->set('json',array($username));
+            
+        }
+    }
+
+
     public function login()
     {
         $this->doNotRenderHeader=1;
@@ -121,7 +266,7 @@ class systemUsersController extends Controller
             $companyAddress='';
             $tin='';
             $appName='';
-            $this->_model->__findCriteria($criteria);
+            /* $this->_model->__findCriteria($criteria);
             $_SESSION['userId']=$this->_model->getid();
             $_SESSION['username']=$this->_model->getusername();
             $configuration=new configurationSetting();
@@ -137,22 +282,22 @@ class systemUsersController extends Controller
             $appName=$configuration->getsystemValue();
 
 
-            $_SESSION['appName']= $appName;
-            $_SESSION['companyName']=$companyName;
+            //$_SESSION['appName']= $appName;
+            //$_SESSION['companyName']=$companyName;
             $_SESSION['companyAddress']=$companyAddress;
             $_SESSION['logo']=$companylogo;
             $_SESSION['TIN']=$tin;
-            $_SESSION['LAST_ACTIVITY']=time();
+            $_SESSION['LAST_ACTIVITY']=time(); */
 
 
 
-            session_write_close();
-            header('location:../dashboard/index');
+            //session_write_close();
+            //header('location:../dashboard/index');
         }
         else
         {
             $this->set('msg','supply the correct username or password');
-            header('location:../?msg=supply the correct username or password');
+            //header('location:../?msg=supply the correct username or password');
         }
     }
 

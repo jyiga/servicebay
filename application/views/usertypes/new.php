@@ -1,8 +1,9 @@
 <div id='dlgusertype' class='easyui-dialog' closed='true' style='width:500px; padding:5px;' toolbar='#usertypebutton' modal='true' >
 	<form id='frmusertype' name='frmusertype' method='post'>
 	<div class='form-group form-float'>
+		<label class='form-label'>userType</label>
 		<div class='form-line'>
-			<label class='form-label'>userType</label>
+			
 				<input name='userTypeName' value='' id='userTypeName' class='form-control' type='text' />
 		</div>
 	</div>

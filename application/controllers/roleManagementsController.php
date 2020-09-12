@@ -20,7 +20,7 @@ class RoleManagementsController extends Controller {
 	public function viewall()
 	{
 		$this->doNotRenderHeader=1;
-		$this->set('json',$this->_model->__view());
+		//$this->set('json',$this->_model->__view());
 		$htmlString="";
 		$criteria=null;
 		if(isset($_REQUEST['module']))
@@ -29,7 +29,7 @@ class RoleManagementsController extends Controller {
 
 		}
 		//$roleManagement=new roleManagementService();
-		$sql="select su.* from systemuser su inner join user u on su.id !=u.id";
+		$sql="select su.* from systemuser su where su.id not in (select id from user)";
 		$htmlString.= "<table class='table table-bordered table-striped table-hover'><tr><td></td>";
 		$userId=array();
 		$userName=array();

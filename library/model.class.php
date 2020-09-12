@@ -894,8 +894,7 @@ class Model
 
     public function __viewQuery($sql)
     {
-        $data2 = array();
-
+        //$data2 = array();
         error_log(date('Y m d :g:i:s:a ') . $sql . "\n", 3, ROOT . DS . 'tmp' . DS . 'logs' . DS . 'data.log');
         return $this->_conn->getResultSet($sql);
     }

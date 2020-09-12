@@ -3,14 +3,19 @@
 		<thead>
                         	
 			<tr>
-				<th field='id' width='90'>id</th>
-				<th field='firstName' width='90'>firstName</th>
-				<th field='lastName' width='90'>lastName</th>
-				<th field='mobileNumber' width='90'>mobileNumber</th>
-				<th field='creationDate' width='90'>creationDate</th>
-				<th field='statusId' width='90'>statusId</th>
+				<th field='id' width='90'>Id</th>
+				<th field='firstName' width='90'>First Name</th>
+				<th field='lastName' width='90'>Last Name</th>
+				<th field='mobileNumber' width='90'>Mobile Number</th>
+				<th field='email' width='90'>Email</th>
+				<th field='creationDate' width='90'>Creation Date</th>
+				<th field='statusId' width='90'>Status</th>
 			</tr>
 		</thead>
 	</table>
-	<div id='toolbar'>\n\t\t<a href="#" class="btn btn-primary btn-sm" onclick="newuser()"><i class="fa fa-plus-circle"></i>Add</a>\n\t\t<a href="#" class="btn btn-link" onclick="edituser()"><i class="fa fa-pencil"></i>Edit</a>
-        \n\t\t<a href="#" class="btn btn-link" onclick="deleteuser()"><i class="fa fa-times-circle"></i>Delete</a>\n\t</div>\n</div>
+	<div id='toolbar' style:'padding:15px;'>
+		<a href="#" class="btn btn-primary btn-sm" onclick="newuser()"><i class="fa fa-plus-circle"></i>Add</a>
+		<a href="#" class="btn btn-link" onclick="edituser()"><i class="fa fa-pencil"></i>Edit</a>
+		<a href="#" class="btn btn-link" onclick="deleteuser()"><i class="fa fa-times-circle"></i>Delete</a>
+	</div>
+</div>

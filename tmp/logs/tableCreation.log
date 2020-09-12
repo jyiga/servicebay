@@ -34,3 +34,8 @@
 2020 07 19 :10:54:53:am Create table testxp(id INT(11) NOT NULL AUTO_INCREMENT,Name VARCHAR(150) NOT NULL ,PRIMARY KEY (id ));
 2020 07 19 :2:28:28:pm Create table pages(id INT(11) NOT NULL ,PRIMARY KEY (id ));
 2020 08 10 :7:24:55:am Create table businessprofileimg(id INT(15) NOT NULL AUTO_INCREMENT,filePath VARCHAR(250) NULL ,fileType VARCHAR(150) NOT NULL ,businessId INT(15) NOT NULL ,PRIMARY KEY (id ));
+2020 08 15 :4:54:38:pm Create table routineactive(id int(11) NOT NULL auto_increment,action varchar(150) NULL );
+2020 08 15 :4:54:58:pm Create table routineactive(id int(11) NOT NULL auto_increment,action varchar(150) NULL );
+2020 08 22 :10:00:59:am Create table apiroute(id INT(15) NOT NULL AUTO_INCREMENT,userId VARCHAR(150) NOT NULL ,creationTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,responseTime DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,actionQuery VARCHAR(150) NULL ,PRIMARY KEY (id ));
+2020 08 22 :11:22:13:am Create table userapikey(id INT(15) NOT NULL AUTO_INCREMENT,apiKey VARCHAR(150) NOT NULL ,userId VARCHAR(150) NOT NULL ,creationDate DATE NOT NULL ,expiryDate DATE NOT NULL ,isActive INT(1) NOT NULL ,PRIMARY KEY (id ));
+2020 09 09 :8:19:12:pm Create table receiptcopy(id INT(15) NOT NULL AUTO_INCREMENT,receiptContext VARCHAR(520) NOT NULL ,vehiclePlate VARCHAR(50) NOT NULL ,creationDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY (id ));
